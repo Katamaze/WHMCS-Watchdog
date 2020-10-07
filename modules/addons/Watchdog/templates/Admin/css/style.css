@@ -1,0 +1,9 @@
+ul.nav a:hover {
+	text-decoration:none !important;
+}
+table.form {
+	width:100%;
+}
+table.form td.fieldlabel {
+	text-align:left;
+}
