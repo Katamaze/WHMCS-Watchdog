@@ -1,5 +1,6 @@
 {
   "cart.php" : "1d129857ea74706b91ac15d8802eafe5",
   "clientarea.php" : "5b13764735405e353b6844bb3384bc23",
-  "crons/cron.php": "55ddd0f6c8292a3227809a5e8f3cd7d2"
+  "crons/cron.php": "55ddd0f6c8292a3227809a5e8f3cd7d2",
+  "modules/addons/Watchdog/Watchdog.php": "765403cc30407e245f14a9dfb75b0ce9"
 }
