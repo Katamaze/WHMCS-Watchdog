@@ -22,7 +22,7 @@ function Watchdog_config()
 	$configarray = array(
 		"name" => "Watchdog",
 	    "description" => 'Detect compromised files of WHMCS that could potentially threaten your core install',
-		"version" => "ALPHA 1",
+		"version" => "ALPHA 2",
 		"author" => "<a href=\"http://katamaze.com\" target=\"_blank\" title=\"katamaze.com\"><img src=\"../modules/addons/Watchdog/images/katamaze.png\"></a>",
 		"fields" => array());
 
@@ -33,8 +33,24 @@ function Watchdog_activate()
 {
     try
     {
-        Capsule::schema()->create('wd_audit', function ($table) { $table->string('path', '260'); $table->char('detected', '32'); $table->char('expected', '32')->nullable(); $table->tinyInteger('status'); $table->primary('path'); $table->index('status'); });
-        Capsule::schema()->create('wd_whitelist', function ($table) { $table->string('path', '260'); $table->primary('path'); });
+        Capsule::schema()->create('wd_audit', function ($table)
+        {
+            $table->string('path', '260');
+            $table->char('detected', '32');
+            $table->char('expected', '32')->nullable();
+            $table->tinyInteger('status');
+            $table->primary('path');
+            $table->index('status');
+            $table->index('action');
+        });
+
+        Capsule::schema()->create('wd_whitelist', function ($table)
+        {
+            $table->string('path', '260');
+            $table->text('notes');
+            $table->primary('path');
+        });
+
         Capsule::table('tbladdonmodules')->insert(['module' => 'Watchdog', 'setting' => 'checkFrequency', 'value' => '']);
         Capsule::table('tbladdonmodules')->insert(['module' => 'Watchdog', 'setting' => 'actionsTaken', 'value' => '']);
         Capsule::table('tbladdonmodules')->insert(['module' => 'Watchdog', 'setting' => 'recipients', 'value' => '']);
@@ -80,7 +96,6 @@ function Watchdog_output($vars)
 	if (!$_GET['view'] OR $_GET['view'] == 'Dashboard')
 	{
 	    $data = new Dashboard();
-
 	    $smarty->assign('data', $data->listing());
 	    $smarty->display(dirname(__FILE__) . '/templates/Admin/Header.tpl');
 	    $smarty->display(dirname(__FILE__) . '/templates/Admin/Dashboard.tpl');
@@ -89,7 +104,6 @@ function Watchdog_output($vars)
 	elseif ($_GET['view'] == 'Whitelist')
 	{
 	    $data = new Whitelist();
-
 	    $smarty->assign('data', $data->listing());
 	    $smarty->display(dirname(__FILE__) . '/templates/Admin/Header.tpl');
 	    $smarty->display(dirname(__FILE__) . '/templates/Admin/Whitelist.tpl');
@@ -98,7 +112,6 @@ function Watchdog_output($vars)
 	elseif ($_GET['view'] == 'Settings')
 	{
 	    $data = new Settings();
-
 	    $smarty->assign('data', $data->listing());
 	    $smarty->display(dirname(__FILE__) . '/templates/Admin/Header.tpl');
 	    $smarty->display(dirname(__FILE__) . '/templates/Admin/Settings.tpl');

@@ -12,21 +12,12 @@
         </div>
         <div id="collapse{$category@iteration}" class="panel-collapse collapse{if $smarty.get.heading==$category@iteration} in{/if}" role="tabpanel" aria-labelledby="heading{$category@iteration}">
         	<div class="panel-body">
-        		{if $catvar == 'demos' AND $smarty.get.throw == 'timeerror'}
-				<div class="alert alert-danger">
-					<h4><i class="fa fa-exclamation-circle fa-lg fa-fw"></i> <strong>{$_ADDONLANG.settings.alert.timeerror.title}</strong></h4>
-					<p>{$_ADDONLANG.settings.alert.timeerror.descr}</p>
-				</div>
-				{/if}
                 <table class="form">
                 	<tbody>
                         {foreach from=$category name=option item=option key=setting}
-                        {if $setting|in_array:$conf->conditionalsettings->geolocation->geolocation_enable AND !$items->geolocation->geolocation_enable.value}{continue}{/if}
                         <tr>
                         	<td class="fieldlabel lined text-left">
                         		<h3><strong>{$_ADDONLANG.settings.$catvar.$setting.title}</strong></h3>
-                        		{if $setting|in_array:['support_premiumprice','support_emergencyprice']}<p class="kata">{$_ADDONLANG.settings.$catvar.$setting.description|replace:'%currency':$conf->whmcs->currencies->{$conf->whmcs->defaultcurrency}->code}</p>
-                        		{else}<p class="kata">{$_ADDONLANG.settings.$catvar.$setting.description}</p>{/if}
                         	</td>
                             <td class="fieldarea" style="width:250px; text-align:center;">
 	                            <form action="{$modulelink}&view=Settings" method="post">

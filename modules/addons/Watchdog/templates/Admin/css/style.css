@@ -7,3 +7,29 @@ table.form {
 table.form td.fieldlabel {
 	text-align:left;
 }
+#accordion .panel-heading { padding: 0;}
+#accordion .panel-title > a {
+	display: block;
+	padding: 0.5em 0.6em;
+    outline: none;
+    text-decoration: none;
+}
+#accordion .panel-title > a.accordion-toggle::before, #accordion a[data-toggle="collapse"]::before {
+    content: "\f077";
+    float: left;
+    font-family: 'FontAwesome', 'Font Awesome 5 Pro';
+    margin-right: 1em;
+}
+#accordion .panel-title > a.accordion-toggle.collapsed::before, #accordion a.collapsed[data-toggle="collapse"]::before  {
+    content:"\f078";
+}
+.clientsummaryactions {
+	margin-left: 10px;
+	margin-top: -3px;
+	background-color: #dff0d8;
+	border-color: #3c763d;
+}
+.wd-actions a {
+	margin-right:15px;
+	margin-top:10px;
+}

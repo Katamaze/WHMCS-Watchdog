@@ -94,33 +94,32 @@ class Audit
 
             if (strlen($path) >= '260')
             {
-                // Toolong
-                $output[] = array('path' => substr($path, 0, 260), 'detected' => $checksum, 'status' => '1');
+                $path = substr($path, 0, 260);
+                $status = '1'; // Toolong
             }
             elseif (!$data['checksum'][$path])
             {
-                // Intruder
-                $output[] = array('path' => $path, 'detected' => $checksum, 'status' => '2');
+                $status = '2'; // Intruder
             }
             elseif ($checksum !== $data['checksum'][$path])
             {
-                // Corrupted
-                $output[] = array('path' => $path, 'detected' => $checksum, 'expected' => $data['checksum'][$path], 'status' => '3');
+                $status = '3'; // Corrupted
             }
+
+            $output[] = array('detected' => $checksum, 'expected' => $data['checksum'][$path], 'path' => $path, 'status' => $status);
         }
 
         // Missing
         foreach (array_diff_key($data['checksum'], $fileSystem) as $path => $checksum)
         {
-            $output[] = array('path' => $path, 'detected' => $checksum, 'status' => '4');
+            $output[] = array('detected' => $checksum, 'expected' => null, 'path' => $path, 'status' => '4');
         }
 
         echo "<pre>";
         print_r($output);
         echo "</pre>";
 
-        die();
-        
+        Capsule::table('wd_audit')->truncate();
         Capsule::table('wd_audit')->insert($output);
 
         die();
