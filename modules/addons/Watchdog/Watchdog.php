@@ -22,7 +22,7 @@ function Watchdog_config()
 	$configarray = array(
 		"name" => "Watchdog",
 	    "description" => 'Detect compromised files of WHMCS that could potentially threaten your core install',
-		"version" => "ALPHA 2",
+		"version" => "ALPHA 2.1",
 		"author" => "<a href=\"http://katamaze.com\" target=\"_blank\" title=\"katamaze.com\"><img src=\"../modules/addons/Watchdog/images/katamaze.png\"></a>",
 		"fields" => array());
 
