@@ -12,3 +12,7 @@ The module verifies checksums of all *.php* files and performs checks every X ho
 * Send **notifications** to the selected administrators
 
 Below you can find a pair of screenshot but keep in mind that we're still working on the module. It won't take much time since basically we're open-sourcing a software we used internally for years. Feel free to Watch/Star the project to receive updates when RC will be ready for use.
+
+![image](https://katamaze.com/modules/addons/Mercury/uploads/files/Blog/92b1487d05bc7249c65af0f94cde4732/whmcs-watchdog-settings-automation.png)
+
+![image](https://katamaze.com/modules/addons/Mercury/uploads/files/Blog/92b1487d05bc7249c65af0f94cde4732/whmcs-watchdog-settings-notifications.png)
