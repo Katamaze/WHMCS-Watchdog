@@ -2,7 +2,7 @@
 
 # Securing WHMCS
 
-We're pleased to announce we're working on releasing our second free module for WHMCS. In case you missed the first, it's named [**Plesk Checker**](https://github.com/Katamaze/WHMCS-Free-Scripts). It lets you quickly identify problems in the integration between WHMCS and Plesk.
+We're pleased to announce we're working on releasing our second free module for WHMCS. In case you missed the first, it's named [**Plesk Checker**](https://github.com/Katamaze/WHMCS-Free-Scripts#plesk-checker). It lets you quickly identify problems in the integration between WHMCS and Plesk.
 
 This time we want to open source a script we used internally for years to help our customers to **fix compromised installations of WHMCS**. Here is the dashboard (click to enlarge).
 
