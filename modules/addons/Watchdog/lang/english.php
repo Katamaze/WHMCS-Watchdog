@@ -242,7 +242,7 @@ $_ADDONLANG['settingcategories']['automation'] = "Automation <i class=\"fad fa-r
 $_ADDONLANG['settingcategories']['notifications'] = "Notifications <i class=\"fas fa-envelope-open-text fa-fw pull-right\"></i>";
 
 $_ADDONLANG['settings']['automation']['checkFrequency']['title'] = "Check Frequency";
-$_ADDONLANG['settings']['automation']['checkFrequency']['description'] = "Run checksum vrification every certain period of time (in hours).";
+$_ADDONLANG['settings']['automation']['checkFrequency']['description'] = "Run checksum verification every certain period of time (in hours).";
 $_ADDONLANG['settings']['automation']['checkFrequency']['placeholder'] = "eg. 24 hours";
 $_ADDONLANG['settings']['automation']['checkFrequency']['docs'] = "";
 $_ADDONLANG['settings']['automation']['actionsTaken']['title'] = "Actions Taken";

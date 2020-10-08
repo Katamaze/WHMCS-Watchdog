@@ -13,7 +13,10 @@
 if (!defined('WHMCS')) die('This file cannot be accessed directly');
 
 use WHMCS\Database\Capsule;
-
+use WHMCS\Module\Addon\Watchdog\Dashboard;
+use WHMCS\Module\Addon\Watchdog\Whitelist;
+use WHMCS\Module\Addon\Watchdog\Settings;
+ 
 function Watchdog_config()
 {
 	$configarray = array(
@@ -30,7 +33,8 @@ function Watchdog_activate()
 {
     try
     {
-        Capsule::schema()->create('wd_whitelist', function ($table) { $table->string('file', '260'); $table->primary('file'); });
+        Capsule::schema()->create('wd_audit', function ($table) { $table->string('path', '260'); $table->char('detected', '32'); $table->char('expected', '32')->nullable(); $table->tinyInteger('status'); $table->primary('path'); $table->index('status'); });
+        Capsule::schema()->create('wd_whitelist', function ($table) { $table->string('path', '260'); $table->primary('path'); });
         Capsule::table('tbladdonmodules')->insert(['module' => 'Watchdog', 'setting' => 'checkFrequency', 'value' => '']);
         Capsule::table('tbladdonmodules')->insert(['module' => 'Watchdog', 'setting' => 'actionsTaken', 'value' => '']);
         Capsule::table('tbladdonmodules')->insert(['module' => 'Watchdog', 'setting' => 'recipients', 'value' => '']);
@@ -48,6 +52,7 @@ function Watchdog_deactivate()
 {
     try
     {
+        Capsule::schema()->dropIfExists('wd_audit');
         Capsule::schema()->dropIfExists('wd_whitelist');
 
         return array('status' => 'success', 'description' => 'This is a demo module only.');
@@ -74,7 +79,6 @@ function Watchdog_output($vars)
 
 	if (!$_GET['view'] OR $_GET['view'] == 'Dashboard')
 	{
-	    require_once('core/Watchdog_Admin/Dashboard.php');
 	    $data = new Dashboard();
 
 	    $smarty->assign('data', $data->listing());
@@ -84,7 +88,6 @@ function Watchdog_output($vars)
 	}
 	elseif ($_GET['view'] == 'Whitelist')
 	{
-	    require_once('core/Watchdog_Admin/Whitelist.php');
 	    $data = new Whitelist();
 
 	    $smarty->assign('data', $data->listing());
@@ -94,7 +97,6 @@ function Watchdog_output($vars)
 	}
 	elseif ($_GET['view'] == 'Settings')
 	{
-	    require_once('core/Watchdog_Admin/Settings.php');
 	    $data = new Settings();
 
 	    $smarty->assign('data', $data->listing());

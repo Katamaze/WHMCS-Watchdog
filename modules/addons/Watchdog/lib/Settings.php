@@ -10,6 +10,8 @@
  *
  */
 
+namespace WHMCS\Module\Addon\Watchdog;
+
 use WHMCS\Database\Capsule;
 
 class Settings
@@ -43,6 +45,8 @@ class Settings
 
             $output[$v->setting] = $v->value;
         }
+
+        $output['WHMCSVersion'] = Capsule::select(Capsule::raw('SELECT value FROM tblconfiguration WHERE setting = "Version" LIMIT 1'))[0]->value;
 
         return $output;
     }
